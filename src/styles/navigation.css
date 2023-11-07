@@ -1,0 +1,27 @@
+nav {
+    margin-top: 10px;
+}
+
+.navigation {
+    display: inline;
+}
+
+.navigation .item {
+    display: inline;
+    margin: 0 10px 0 0;
+    padding: 3px;
+}
+
+.navigation .brand {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.navigation .link {
+    color: #aaa;
+    text-decoration: none;
+}
+
+.navigation .link.active {
+    color: white;
+}

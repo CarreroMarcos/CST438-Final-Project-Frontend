@@ -1,0 +1,43 @@
+.carousel {
+    margin-bottom: 70px;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel .scroll_window {
+    width: 90%;
+    margin: 0 auto -16px auto;
+    display: grid;
+    grid-auto-columns: calc(100%/4.1);
+    grid-auto-flow: column;
+    grid-template-rows: repeat(1,auto);
+    scroll-padding: 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overflow: auto;
+    overscroll-behavior-x: none;
+}
+
+@media screen and (min-width: 2200px) {
+    .carousel .scroll_window {
+        grid-auto-columns: calc(100%/5.25);
+    }
+}
+
+.carousel .scroll_window div {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    scroll-snap-align: none center;
+}
+
+.carousel .nav_arrow.left {
+    top: 0;
+    left: 1%;
+    height: 10vw;
+}
+
+.carousel .nav_arrow.right {
+    top: 0;
+    right: 1%;
+    height: 10vw;
+}
