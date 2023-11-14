@@ -1,9 +1,11 @@
 nav {
-    margin-top: 10px;
+    margin: 10px 20px 10px 0;
+    display: flex;
 }
 
 .navigation {
     display: inline;
+    flex: 50%;
 }
 
 .navigation .item {
@@ -24,4 +26,12 @@ nav {
 
 .navigation .link.active {
     color: white;
+}
+
+.nav_actions {
+    display: inline;
+}
+
+.nav_actions .item {
+    display: inline;
 }

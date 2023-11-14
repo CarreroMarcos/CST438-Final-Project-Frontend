@@ -1,0 +1,19 @@
+.search_and_filter {
+    width: 50%;
+    margin: 20px auto;
+}
+
+.search {
+    background-color: #272727;
+    color: white;
+    padding: 12px 12px;
+    border: 1px solid #474747;
+    width: 350px;
+    font-size: 1.2rem;
+    flex: 50%;
+}
+
+
+.search_stack {
+    display: flex;
+}
