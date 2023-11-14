@@ -1,9 +1,23 @@
 export async function getTopSongs() {
-    return topSongs.data;
+    let response = await fetch('http://localhost:8080/chart')
+    let data = await response.json();
+    return data
 }
 
 export async function getTopAlbums() {
     return topAlbums.data;
+}
+
+export async function search(query) {
+  let response = await fetch('http://localhost:8080/search/'+query)
+  let data = await response.json();
+  return data
+}
+
+export async function getRandomWord() {
+  let wordRes = await fetch('https://random-word-api.herokuapp.com/word?lang=en')
+  let word = await wordRes.json();
+  return word;
 }
 
 const topSongs = {

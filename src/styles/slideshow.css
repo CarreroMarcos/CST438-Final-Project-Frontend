@@ -50,6 +50,8 @@
   }
 
   .card .content .art {
+    width: 250px;
+    height: auto;
     transition: transform 0.2s ease;
   }
 
@@ -85,7 +87,14 @@
 
   .play_button {
     position: absolute;
-    top: 225px;
+    top: 200px;
     left: 2%;
+    background-color: #555555aa;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    color: white;
+    cursor: pointer;
   }
   
