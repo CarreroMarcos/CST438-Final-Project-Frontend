@@ -7,13 +7,18 @@ export default function SearchPage() {
     const [content, setContent] = useState([])
     const [searchQ, setSearchQ] = useState("")
     const [searching, setSearching] = useState(false)
-    let randomWord
 
     useEffect(() => {
         const getContent = async () => {
-            randomWord = await getRandomWord()
-            setContent(await search(randomWord));
-            setSearchQ(randomWord)
+            let query
+            if(searchQ.length < 1) {
+                query = await getRandomWord()
+                setSearchQ(query)
+            } else {
+                query = searchQ
+            }
+
+            setContent(await search(query));
         }
         getContent();
     }, [searching])
@@ -22,7 +27,7 @@ export default function SearchPage() {
         <>
             <div className="search_and_filter">
                 <div className="search_stack">
-                    <input type="text" placeholder={searchQ} className="search"></input>
+                    <input type="text" placeholder={searchQ} className="search" onChange={(e) => {setSearchQ(e.target.value); setSearching(!searching)}}></input>
                     <button className="secondary_button"><Filter /></button>
                 </div>
             </div>
