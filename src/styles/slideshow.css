@@ -1,5 +1,5 @@
 .carousel {
-    margin-bottom: 70px;
+    margin-bottom: 50px;
     overflow: hidden;
     position: relative;
   }
@@ -8,6 +8,7 @@
     width: 90%;
     margin: 0 auto -16px auto;
     display: grid;
+    gap: 10px;
     grid-auto-columns: calc(4.1);
     grid-auto-flow: column;
     grid-template-rows: repeat(1,auto);
@@ -16,6 +17,7 @@
     scrollbar-width: none;
     overflow: auto;
     overscroll-behavior-x: none;
+    padding-top: 10px;
   }
   
   .carousel .scroll_window div {
@@ -37,7 +39,37 @@
   }
   
   .card {
-    width: fit-content
+    width: 250px;
+    height: 350px;
+    position: relative;
+  }
+
+  .card .content {
+    position: absolute;
+    z-index: 1;
+  }
+
+  .card .content .art {
+    transition: transform 0.2s ease;
+  }
+
+  .card:hover .content .art {
+    transform: rotateX(-10deg) scale(1.05);
+  }
+
+  .card:hover .background {
+    transform: translateY(5px) scale(1.05);
+  }
+
+  .card .background {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 250px;
+    object-fit: cover;
+    filter: blur(5px);
+    transition: transform 0.2s ease;
   }
   
   .nav_arrow {
@@ -49,5 +81,11 @@
   
   .nav_arrow:hover {
     opacity: 1;
+  }
+
+  .play_button {
+    position: absolute;
+    top: 225px;
+    left: 2%;
   }
   
