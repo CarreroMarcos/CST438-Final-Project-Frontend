@@ -8,7 +8,7 @@ export default function Menu({currentPage}) {
                 <li className="item"><a href="/search" className={(currentPage === "/search") ? "link active" : "link"}>Search</a></li>
             </ul>
             <ul className="nav_actions">
-                <li className="item">Login</li>
+                <li className="item"><a href="/login" className="link">Login</a></li>
             </ul>
         </nav>
     )

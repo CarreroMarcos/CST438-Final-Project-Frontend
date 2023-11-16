@@ -17,3 +17,11 @@
 .search_stack {
     display: flex;
 }
+
+.login {
+    padding: 50px;
+    border-radius: 10px;
+    background-color: #272727;
+    width: 40%;
+    margin: 50px auto;
+}
