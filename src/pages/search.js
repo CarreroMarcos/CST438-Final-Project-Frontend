@@ -1,7 +1,7 @@
 import { Filter } from "react-feather"
 import ContentGrid from "../components/ContentGrid"
 import { useEffect, useState } from "react"
-import { getRandomWord, getTopSongs, search } from "../data/getSongs"
+import { getRandomWord, search } from "../data/getSongs"
 
 export default function SearchPage() {
     const [content, setContent] = useState([])
