@@ -31,7 +31,6 @@ export default function SearchPage() {
             <div className="search_and_filter">
                 <div className="search_stack">
                     <input type="text" placeholder={searchQ} className="search" onChange={(e) => {setSearchQ(e.target.value); setSearching(!searching)}}></input>
-                    <button className="secondary_button"><Filter /></button>
                 </div>
             </div>
             <ContentGrid content={content} />

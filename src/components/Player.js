@@ -1,16 +1,16 @@
 import {Howl, Howler} from 'howler';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { Heart, Pause, Play, Volume2, VolumeX } from 'react-feather';
+import { isSongSaved, saveSong } from '../data/accounts';
+import { useNavigate } from 'react-router-dom';
 
 export class Player {
     static currentlyPlaying = -1
     static duration = 30
     static play_time = 0;
     static intervalId;
-    static title = ""
-    static artist = ""
-    static art = ""
+    static song = {}
     static loadCallback = () => {}
     static playCallback = () => {}
     static muteCallback = () => {}
@@ -22,9 +22,7 @@ export class Player {
             src: [songOBJ.preview]
         })
         this.currentlyPlaying = song;
-        this.title = songOBJ.title;
-        this.artist = songOBJ.artist;
-        this.art = songOBJ.cover_art
+        this.song = songOBJ
         song.play();
         song.volume(0.3)
         this.loadCallback();
@@ -96,17 +94,25 @@ export class Player {
 }
 
 export default function PlayerComponent() {
-    const [title, setTitle] = useState("")
-    const [artist, setArtist] = useState("");
-    const [art, setArt] = useState("");
+    const [song, setSong] = useState({})
     const [playing, setPlaying] = useState(false);
     const [mute, setMute] = useState(false);
     const [playtime, setPlaytime] = useState(0)
+    const [liked, setLiked] = useState(false);
 
-    Player.onLoadSong(() => {
-        setArt(Player.art);
-        setTitle(Player.title);
-        setArtist(Player.artist);
+    useEffect(() => {
+        const token = sessionStorage.getItem("jwt")
+
+        if(!token) return;
+
+        async function checkSaved() {
+            setLiked(await isSongSaved(song.deezer_id));
+        }
+        checkSaved();
+    }, [liked, song])
+
+    Player.onLoadSong(async () => {
+        setSong(Player.song)
     })
 
     Player.onPlay((playing) => {
@@ -121,15 +127,27 @@ export default function PlayerComponent() {
         setPlaytime(Player.play_time)
     })
 
+    const save = () => {
+        const token = sessionStorage.getItem("jwt")
+
+        if(!token) {
+            return;
+        }
+
+        saveSong(token, song.deezer_id)
+        setLiked(true)
+    }
+    
+
     return (
         <div className='player'>
-            <img className='player_background' src={art}></img>
             <span className='play_progress' style={{width: `${playtime * 1/29.0}%`}}/>
             <div className='play_info'>
                 {(playing) ? <button onClick={() => Player.pause()}><Pause /></button>: <button onClick={() => Player.restart()}><Play /></button>}
                 <button onClick={() => Player.mute()}>{(mute) ? <VolumeX /> : <Volume2 />}</button>
-                <button id="heart"><Heart /></button>
-                <h5>{title} - {artist}</h5>
+                {(liked) ? <button className="saved" id="heart"><Heart /></button> : <button id="heart" onClick={save}><Heart /></button>}
+                {(song.cover_art) ? <img className='player_song_art' src={song.cover_art}></img> : false}
+                <h5>{song.title} - {song.artist}</h5>
             </div>
         </div>
     )

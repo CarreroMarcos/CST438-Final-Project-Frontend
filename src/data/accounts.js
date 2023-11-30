@@ -26,6 +26,15 @@ export async function saveSong(email, id) {
     })
 }
 
+export async function unsaveSong(id) {
+    await fetch('http://localhost:8080/userLibrary/delete/' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
+
 export async function isSongSaved(deezer_id) {
     let response = await fetch('http://localhost:8080/userlibrary')
     let data = await response.json();
@@ -37,4 +46,17 @@ export async function isSongSaved(deezer_id) {
         }
     })
     return songFound;
+}
+
+export async function getLibraryId(email, deezer_id) {
+    let response = await fetch('http://localhost:8080/userlibrary')
+    let data = await response.json();
+    let foundSong = {};
+    data.forEach((song) => {
+        // console.log(`Songs Deezer ID ${song.deezer_id}. Inputted Deezer ID ${deezer_id}`)
+        if(song.deezer_id == deezer_id && song.user_id === 0) {
+            foundSong = song;
+        }
+    })
+    return foundSong.library_id;
 }

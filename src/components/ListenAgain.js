@@ -14,7 +14,7 @@ export default function ListenAgain() {
         getData();
     }, [])
 
-    if(!token) {
+    if(!token || !song || !song.cover_art) {
         return (<></>);
     }
 

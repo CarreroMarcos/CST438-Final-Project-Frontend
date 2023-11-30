@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Heart, Play } from "react-feather";
 import { Link, useNavigate } from "react-router-dom";
-import { isSongSaved, saveSong } from "../data/accounts";
+import { getLibraryId, isSongSaved, saveSong, unsaveSong } from "../data/accounts";
 import { Player } from "./Player";
 
 export default function Card({item, id}) {
@@ -35,6 +35,23 @@ export default function Card({item, id}) {
         }
 
         saveSong(token, item.deezer_id)
+        setSaved(true)
+    }
+
+    const unsave = async () => {
+        const token = sessionStorage.getItem("jwt")
+
+        if(!token) {
+            navigate('/login')
+        }
+
+        if(item.library_id) {
+            unsaveSong(item.library_id);
+        } else {
+            unsaveSong(await getLibraryId(item.deezer_id))
+        }
+        setSaved(false)
+        navigate("#")
     }
 
     return (
@@ -45,7 +62,7 @@ export default function Card({item, id}) {
                 <h4>{item.title}</h4>
                 <Link to={`/artist/${item.artist}`}>{item.artist}</Link>
                 <button className="play_button" onClick={(e) => play(e)}><Play /></button>
-                {(saved) ? <button className="heart_button saved"><Heart /></button> : <button className="heart_button" onClick={(e) => save(e)}><Heart /></button>}
+                {(saved) ? <button className="heart_button saved" onClick={unsave}><Heart /></button> : <button className="heart_button" onClick={(e) => save(e)}><Heart /></button>}
             </div>
         </div>
     )

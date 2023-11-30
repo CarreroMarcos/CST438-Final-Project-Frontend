@@ -3,7 +3,6 @@ export const featuredArtists = [
     "Dua Lipa",
     "Drake",
     "AJR",
-    "Simon & Garfunkel",
     "ABBA",
     "Britney Spears",
     "Adele",
@@ -19,5 +18,10 @@ export const featuredArtists = [
     "Gunna",
     "Paramore",
     "Hot Milk",
-    "Aries"
+    "Aries",
+    "The 1975",
+    "Panic! at the Disco",
+    "All Time Low",
+    "Joji",
+    "Antent"
 ]
