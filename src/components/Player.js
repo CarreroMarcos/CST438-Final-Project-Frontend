@@ -10,6 +10,7 @@ export class Player {
     static intervalId;
     static title = ""
     static artist = ""
+    static art = ""
     static loadCallback = () => {}
     static playCallback = () => {}
     static muteCallback = () => {}
@@ -23,7 +24,9 @@ export class Player {
         this.currentlyPlaying = song;
         this.title = songOBJ.title;
         this.artist = songOBJ.artist;
+        this.art = songOBJ.cover_art
         song.play();
+        song.volume(0.3)
         this.loadCallback();
         this.playCallback(true);
 
@@ -34,13 +37,13 @@ export class Player {
             this.play_time += 1;
             this.playTimeCallback();
 
-            if(this.play_time === 30) {
+            if(this.play_time === 3000) {
                 this.play_time = 0;
                 this.playTimeCallback();
                 this.playCallback(false);
                 clearInterval(this.intervalId)
             }
-        }, 1000)
+        }, 10)
     }
 
     static onLoadSong(callback) {
@@ -62,13 +65,13 @@ export class Player {
             this.play_time += 1;
             this.playTimeCallback();
 
-            if(this.play_time === 30) {
+            if(this.play_time === 3000) {
                 this.play_time = 0;
                 this.playTimeCallback();
                 this.playCallback(false);
                 clearInterval(this.intervalId)
             }
-        }, 100)
+        }, 10)
     }
 
     static pause () {
@@ -79,7 +82,7 @@ export class Player {
 
     static mute() {
         if(this.currentlyPlaying.volume() === 0){
-            this.currentlyPlaying.volume(1)
+            this.currentlyPlaying.volume(0.3)
             this.muteCallback(false)
         } else {
             this.currentlyPlaying.volume(0)
@@ -95,11 +98,13 @@ export class Player {
 export default function PlayerComponent() {
     const [title, setTitle] = useState("")
     const [artist, setArtist] = useState("");
+    const [art, setArt] = useState("");
     const [playing, setPlaying] = useState(false);
     const [mute, setMute] = useState(false);
     const [playtime, setPlaytime] = useState(0)
 
     Player.onLoadSong(() => {
+        setArt(Player.art);
         setTitle(Player.title);
         setArtist(Player.artist);
     })
@@ -118,11 +123,12 @@ export default function PlayerComponent() {
 
     return (
         <div className='player'>
-            <span className='play_progress' style={{width: `${playtime * 100/29.0}%`}}/>
+            <img className='player_background' src={art}></img>
+            <span className='play_progress' style={{width: `${playtime * 1/29.0}%`}}/>
             <div className='play_info'>
-                <button><Heart /></button>
                 {(playing) ? <button onClick={() => Player.pause()}><Pause /></button>: <button onClick={() => Player.restart()}><Play /></button>}
                 <button onClick={() => Player.mute()}>{(mute) ? <VolumeX /> : <Volume2 />}</button>
+                <button id="heart"><Heart /></button>
                 <h5>{title} - {artist}</h5>
             </div>
         </div>

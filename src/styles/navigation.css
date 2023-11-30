@@ -39,4 +39,6 @@ nav {
 
 .nav_actions .item {
     display: inline;
+    margin: 0 10px 0 0;
+    padding: 3px;
 }

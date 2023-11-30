@@ -1,0 +1,23 @@
+export const featuredArtists = [
+    "Henzoid",
+    "Dua Lipa",
+    "Drake",
+    "AJR",
+    "Simon & Garfunkel",
+    "ABBA",
+    "Britney Spears",
+    "Adele",
+    "yama",
+    "Dazbee",
+    "BTS",
+    "BLACKPINK",
+    "Usher",
+    "The Weeknd",
+    "of Montreal",
+    "SZA",
+    "Andora",
+    "Gunna",
+    "Paramore",
+    "Hot Milk",
+    "Aries"
+]

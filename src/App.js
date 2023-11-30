@@ -4,6 +4,10 @@ import Homepage from './pages/homepage';
 import Menu from './components/Menu';
 import SearchPage from './pages/search';
 import LoginPage from './pages/login';
+import Signup from './pages/signup';
+import PlayerComponent from './components/Player';
+import Library from './pages/library';
+import ArtistPage from './pages/artist';
 // import SongPage from './pages/song';
 
 const router = createBrowserRouter([
@@ -18,6 +22,18 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />
+  },
+  {
+    path: "/signup",
+    element: <Signup />
+  },
+  {
+    path: '/library',
+    element: <Library />
+  },
+  {
+    path: '/artist/:artistName',
+    element: <ArtistPage />
   }
 ]);
 
@@ -25,8 +41,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <Menu currentPage={router.basename}/>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}>
+      </RouterProvider>
+      <PlayerComponent />
     </>
   );
 }

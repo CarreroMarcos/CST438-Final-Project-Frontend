@@ -2,12 +2,15 @@
     position: sticky;
     bottom: 0%;
     width: calc(100vw - 40px);
-    background-color: #272727;
     padding: 20px;
     z-index: 5;
+    height: 40px;
+    background-color: #272727;
+    overflow: hidden;
 }
 
 .play_info {
+    position: absolute;
     display: flex;
     align-items: center;
 }
@@ -16,7 +19,7 @@
     display: block;
     background:  rgba(104,9,121,1);
     height: 5px;
-    transition: width 1s linear;
+    transition: width 0.1s linear;
     width: 100%;
     margin: -20px 0 10px -20px;
 }
@@ -27,9 +30,28 @@
     border: none;
     color: white;
     cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 .player h5 {
     margin: 0 10px;
     display: inline;
+}
+
+.player button:hover {
+    transform: scale(1.1);
+}
+
+.player button#heart:hover {
+    color: #c84a4a;
+    fill: #c84a4a;
+}
+
+.player_background {
+    position: absolute;
+    z-index: -1;
+    top: -100px;
+    right: 50%;
+    filter: blur(50px);
+    scale: 6 0.5 6;
 }
