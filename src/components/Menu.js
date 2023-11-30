@@ -17,7 +17,7 @@ export default function Menu({currentPage}) {
             </ul>
             <ul className="nav_actions">
                 <li className="item">
-                    {(sessionStorage.getItem("jwt")) ? <Link to="/library" className="link">Your Library</Link>  :<Link to="/login" className="link">Login</Link>}
+                    {(sessionStorage.getItem("jwt")) ? <Link to="/library" className={(currentPage === "library") ? "link active" : "link"}>Your Library</Link>  :<Link to="/login" className="link">Login</Link>}
                 </li>
                 {(sessionStorage.getItem('jwt')) ? <li className="item">
                     <a href="" className="link" onClick={logout}>Logout</a>

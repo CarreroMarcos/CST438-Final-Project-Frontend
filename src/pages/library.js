@@ -23,7 +23,7 @@ export default function Library() {
 
     return (
         <>
-            <Menu currentPage={""}/>
+            <Menu currentPage={"library"}/>
             <h2 className="top_chart">Your Library</h2>
             <ContentGrid content={songs}/>
         </>

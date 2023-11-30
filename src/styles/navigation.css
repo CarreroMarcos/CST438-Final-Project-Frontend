@@ -42,3 +42,7 @@ nav {
     margin: 0 10px 0 0;
     padding: 3px;
 }
+
+.nav_actions .link.active {
+    color: white;
+}
