@@ -27,6 +27,7 @@ export default function Homepage() {
             <Carousel list="songs" items={topSongs}/>
             <h2 className="top_chart">Featured Artist: {featuredArtists[featuredArtist]}</h2>
             <Carousel list="albums" items={artistFeature}/>
+            <div className="page_bumper"></div>
         </>
     )
 }
