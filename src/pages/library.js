@@ -6,6 +6,7 @@ import { getUserLibrary } from "../data/getSongs";
 
 export default function Library() {
     const [songs, setSongs] = useState([])
+    const [update, setUpdate] = useState(0)
 
     const token = sessionStorage.getItem("jwt")
     const navigate = useNavigate();
@@ -19,11 +20,12 @@ export default function Library() {
 
     useEffect(() => {
         getData();
-    }, [songs])
+    }, [update])
 
     const onUpdate = (update) => {
         if(update === "unsave") {
             getData();
+            setUpdate(update + 1);
         }
     }
 
@@ -32,6 +34,7 @@ export default function Library() {
             <Menu currentPage={"library"}/>
             <h2 className="top_chart">Your Library</h2>
             <ContentGrid content={songs} callback={onUpdate}/>
+            <input type={"hidden"} value={update}></input>
         </>
     )
 }
