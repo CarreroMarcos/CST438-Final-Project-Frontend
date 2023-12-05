@@ -49,6 +49,15 @@
     z-index: 1;
   }
 
+  .card .content h4 {
+    margin-bottom: 2px;
+  }
+
+  .card .content a {
+    color: #aaa;
+    margin: 0;
+  }
+
   .card .content .art {
     width: 250px;
     height: auto;
@@ -59,8 +68,15 @@
     transform: rotateX(-10deg) scale(1.05);
   }
 
+  .card.playing .content .art {
+    animation: playingBounce 2s ease;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+  }
+
   .card:hover .background {
     transform: translateY(5px) scale(1.05);
+    opacity: 0.4;
   }
 
   .card .background {
@@ -71,7 +87,8 @@
     width: 250px;
     object-fit: cover;
     filter: blur(5px);
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    opacity: 1;
   }
   
   .nav_arrow {
@@ -115,6 +132,14 @@
     transition: transform 0.2s ease, color 0.2s ease
   }
 
+  .heart_button.saved {
+    color: #c84a4a;
+  }
+
+  .heart_button.saved:hover {
+    color: white;
+  }
+
   .play_button:hover {
     transform: scale(1.1);
   }
@@ -123,4 +148,25 @@
     transform: scale(1.1);
     color: #c84a4a;
   }
+
+  .page_bumper {
+    height: 50px;
+  }
   
+  @keyframes playingBounce {
+    0% {
+      transform: rotateX(-10deg) scale(1) rotateZ(0deg)
+    }
+    25% {
+      transform: rotateX(-10deg) scale(1.03) rotateZ(2deg);
+    }
+    50% {
+      transform: rotateX(-10deg) scale(1) rotateZ(0deg)
+    }
+    75% {
+      transform: rotateX(-10deg) scale(1.03) rotateZ(-2deg);
+    }
+    100% {
+      transform: rotateX(-10deg) scale(1) rotateZ(0deg)
+    }
+  }

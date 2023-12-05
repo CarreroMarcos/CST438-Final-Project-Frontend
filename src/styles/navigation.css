@@ -24,6 +24,11 @@ nav {
     text-decoration: none;
 }
 
+.nav_actions .link {
+    color: #aaa;
+    text-decoration: none;
+}
+
 .navigation .link.active {
     color: white;
 }
@@ -34,4 +39,10 @@ nav {
 
 .nav_actions .item {
     display: inline;
+    margin: 0 10px 0 0;
+    padding: 3px;
+}
+
+.nav_actions .link.active {
+    color: white;
 }
