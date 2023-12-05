@@ -96,5 +96,31 @@
     height: 45px;
     color: white;
     cursor: pointer;
+    padding-top: 2px;
+    transition: transform 0.2s ease
+  }
+
+  .heart_button {
+    position: absolute;
+    top: 200px;
+    left: 22%;
+    background-color: #555555aa;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    color: white;
+    cursor: pointer;
+    padding-top: 5px;
+    transition: transform 0.2s ease, color 0.2s ease
+  }
+
+  .play_button:hover {
+    transform: scale(1.1);
+  }
+
+  .heart_button:hover {
+    transform: scale(1.1);
+    color: #c84a4a;
   }
   
