@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getLibraryId, isSongSaved, saveSong, unsaveSong } from "../data/accounts";
 import { Player } from "./Player";
 
-export default function Card({item, id}) {
+export default function Card({item, id, callback}) {
     const [saved, setSaved] = useState(false);
     const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ export default function Card({item, id}) {
         if(!token) return;
 
         async function checkSaved() {
-            setSaved(await isSongSaved(item.deezer_id));
+            setSaved(await isSongSaved(item.deezer_id, token));
         }
         checkSaved();
     }, [saved])
@@ -36,6 +36,9 @@ export default function Card({item, id}) {
 
         saveSong(token, item.deezer_id)
         setSaved(true)
+        if(callback) {
+            callback("save");
+        }
     }
 
     const unsave = async () => {
@@ -46,12 +49,14 @@ export default function Card({item, id}) {
         }
 
         if(item.library_id) {
-            unsaveSong(item.library_id);
+            unsaveSong(item.library_id, token);
         } else {
-            unsaveSong(await getLibraryId(item.deezer_id))
+            unsaveSong(await getLibraryId(token, item.deezer_id), token)
         }
         setSaved(false)
-        navigate("#")
+        if(callback) {
+            callback("unsave");
+        }
     }
 
     return (

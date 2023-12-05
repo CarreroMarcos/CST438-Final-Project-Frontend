@@ -13,30 +13,53 @@ export async function createAccount(username, password, email) {
     })
 }
 
-export async function saveSong(email, id) {
-    await fetch('http://localhost:8080/userlibrary', {
+export async function loginAccount(username, password) {
+    let res = await fetch("http://localhost:8080/login", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            email: email,
+            username: username,
+            password: password
+        })
+    })
+    const jwtToken = res.headers.get('Authorization');
+    if (jwtToken !== null) {
+        sessionStorage.setItem("jwt", jwtToken);
+        return true;
+    }
+}
+
+export async function saveSong(token, id) {
+    await fetch('http://localhost:8080/userlibrary', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : token
+        },
+        body: JSON.stringify({
             deezer_id: id
         })
     })
 }
 
-export async function unsaveSong(id) {
+export async function unsaveSong(id, token) {
     await fetch('http://localhost:8080/userLibrary/delete/' + id, {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': token
         }
     })
 }
 
-export async function isSongSaved(deezer_id) {
-    let response = await fetch('http://localhost:8080/userlibrary')
+export async function isSongSaved(deezer_id, token) {
+    let response = await fetch('http://localhost:8080/userlibrary', {
+        headers: {
+            'Authorization': token
+        }
+    })
     let data = await response.json();
     let songFound = false;
     data.forEach((song) => {
@@ -48,8 +71,12 @@ export async function isSongSaved(deezer_id) {
     return songFound;
 }
 
-export async function getLibraryId(email, deezer_id) {
-    let response = await fetch('http://localhost:8080/userlibrary')
+export async function getLibraryId(token, deezer_id) {
+    let response = await fetch('http://localhost:8080/userlibrary', {
+        headers: {
+            'Authorization': token
+        }
+    })
     let data = await response.json();
     let foundSong = {};
     data.forEach((song) => {

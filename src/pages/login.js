@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { Link, redirect, useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
+import { loginAccount } from "../data/accounts";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
 
-    const login = () => {
-        sessionStorage.setItem("jwt", email)
-        navigate("/")
+    const login = async () => {
+        await loginAccount(email, password)
+        if(sessionStorage.getItem('jwt')) {
+            navigate("/")
+        }
     }
     
     return (
@@ -19,8 +22,8 @@ export default function LoginPage() {
                 <form method="">
                     <h3>Sign In</h3>
                     <div className='field'>
-                        <p className='label'>Email</p>
-                        <input className='input wide' type='text' autoComplete="email" name='email' placeholder='bmeier@csumb.edu' onChange={(e) => {setEmail(e.target.value)}}></input>
+                        <p className='label'>Username</p>
+                        <input className='input wide' type='text' autoComplete="username" name='username' placeholder='Ben' onChange={(e) => {setEmail(e.target.value)}}></input>
                     </div>
                     <div className='field'>
                         <p className='label'>Password</p>

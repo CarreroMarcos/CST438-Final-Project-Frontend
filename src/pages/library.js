@@ -13,19 +13,25 @@ export default function Library() {
     if(!token) {
         navigate("/login")
     } 
+    const getData = async () => {
+        setSongs(await getUserLibrary(token))
+    }
 
     useEffect(() => {
-        async function getData() {
-            setSongs(await getUserLibrary(token))
-        }
         getData();
-    }, [])
+    }, [songs])
+
+    const onUpdate = (update) => {
+        if(update === "unsave") {
+            getData();
+        }
+    }
 
     return (
         <>
             <Menu currentPage={"library"}/>
             <h2 className="top_chart">Your Library</h2>
-            <ContentGrid content={songs}/>
+            <ContentGrid content={songs} callback={onUpdate}/>
         </>
     )
 }

@@ -10,8 +10,12 @@ export async function search(query) {
   return data
 }
 
-export async function getUserLibrary(email) {
-  let response = await fetch('http://localhost:8080/userlibrary')
+export async function getUserLibrary(token) {
+  let response = await fetch('http://localhost:8080/userlibrary', {
+    headers: {
+      'Authorization' : token
+    }
+  })
   let data = await response.json();
   return data;
 }

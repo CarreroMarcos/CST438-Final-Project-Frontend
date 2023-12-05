@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link, redirect } from "react-router-dom"
+import { Link, redirect, useNavigate } from "react-router-dom"
 import Menu from "../components/Menu"
 import { createAccount } from "../data/accounts"
 
@@ -7,10 +7,11 @@ export default function Signup() {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate();
 
     const signUpWithEmail = () => {
         createAccount(username, password, email).then(() => {
-            redirect("/")
+            navigate("/login")
         })
     }
 
